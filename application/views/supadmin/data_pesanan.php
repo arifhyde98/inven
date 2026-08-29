@@ -107,10 +107,10 @@ date_default_timezone_set('Asia/Jakarta');
                                                     </td>
 
                                                     <td>
-                                                        <?= $cabang['nama_cabang'] ?>
+                                                        <?= isset($cabang['nama_cabang']) ? $cabang['nama_cabang'] : '-' ?>
                                                     </td>
                                                     <td>
-                                                        <?= $a['nama_suplier'] == null ? '-' : $a['nama_suplier'] ?>
+                                                        <?= !empty($a['nama_suplier']) ? $a['nama_suplier'] : '-' ?>
                                                     </td>
                                                     <td>
                                                         <?= $dp['jenis_pesanan'] == 1 ? $jumlah_pesan_stok : $jumlah_pesan_barang ?>
@@ -172,10 +172,10 @@ date_default_timezone_set('Asia/Jakarta');
                                                     </td>
 
                                                     <td>
-                                                        <?= $cabang['nama_cabang'] ?>
+                                                        <?= isset($cabang['nama_cabang']) ? $cabang['nama_cabang'] : '-' ?>
                                                     </td>
                                                     <td>
-                                                        <?= $a['nama_suplier'] == null ? '-' : $a['nama_suplier'] ?>
+                                                        <?= !empty($a['nama_suplier']) ? $a['nama_suplier'] : '-' ?>
                                                     </td>
                                                     <td>
                                                         <?= $dp['jenis_pesanan'] == 1 ? $jumlah_pesan_stok : $jumlah_pesan_barang ?>
@@ -271,14 +271,14 @@ date_default_timezone_set('Asia/Jakarta');
                             </div>
                             <div class="form-group">
                                 <label for="">Pesan Dari</label>
-                                <input type="text" readonly class="form-control" value="<?= $x['nama_suplier'] == null ? '-' : $x['nama_suplier'] ?>">
+                                <input type="text" readonly class="form-control" value="<?= !empty($x['nama_suplier']) ? $x['nama_suplier'] : '-' ?>">
                             </div>
 
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="">Dikirm Ke</label>
-                                <input type="text" readonly class="form-control" value="<?= $y['nama_cabang'] ?>">
+                                <input type="text" readonly class="form-control" value="<?= isset($y['nama_cabang']) ? $y['nama_cabang'] : '-' ?>">
                             </div>
                             <div class="form-group">
                                 <label for="">Tanggal Pesan</label>

@@ -9,8 +9,8 @@
             <div class="mt-3">
                 <div class="float-left">
                     <p>Nama Pesanan : <?= $pesanan['nama'] ?></p>
-                    <p>Pesan Dari : <?= $sp['nama_suplier'] == null ? '-' : $sp['nama_suplier'] ?></p>
-                    <p>Dikirm Ke : <?= $cb['nama_cabang'] ?> <br><?= $cb['alamat'] ?></p>
+                    <p>Pesan Dari : <?= !empty($sp['nama_suplier']) ? $sp['nama_suplier'] : '-' ?></p>
+                    <p>Dikirm Ke : <?= isset($cb['nama_cabang']) ? $cb['nama_cabang'] : '-' ?> <br><?= isset($cb['alamat']) ? $cb['alamat'] : '' ?></p>
                 </div>
                 <div class="float-right">
                     <p>Tanggal Pesan : <?= $pesanan['tanggal_pesan'] ?></p>
