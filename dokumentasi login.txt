@@ -1,0 +1,10 @@
+Login
+
+
+Untuk login Superadmin : username = sadmin
+		    password = asd
+
+Untuk login Admin : username = admin1
+		   password = asd
+
+Untuk mengakses dokumentasi http://localhost/inven/dokumentasi
