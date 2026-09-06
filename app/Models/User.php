@@ -2,48 +2,85 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var list<string>
-     */
+    protected $table = 'users';
+
     protected $fillable = [
-        'name',
+        'nama',
+        'username',
         'email',
+        'jenis_kelamin',
         'password',
+        'foto_profile',
+        'penempatan_cabang',
+        'role_id',
+        'status',
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var list<string>
-     */
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
     protected function casts(): array
     {
         return [
-            'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'status' => 'integer',
+            'role_id' => 'integer',
+            'penempatan_cabang' => 'integer',
         ];
+    }
+
+    public function getNameAttribute(): string
+    {
+        return $this->nama ?? $this->username ?? '';
+    }
+
+    public function setNameAttribute($value): void
+    {
+        $this->attributes['nama'] = $value;
+    }
+
+    public function isSuperAdmin(): bool
+    {
+        return $this->role_id === 1;
+    }
+
+    public function isAdmin(): bool
+    {
+        return $this->role_id === 2;
+    }
+
+    public function isActive(): bool
+    {
+        return (int) $this->status === 1;
+    }
+
+    public function role()
+    {
+        return $this->belongsTo(RoleUser::class, 'role_id');
+    }
+
+    public function cabang()
+    {
+        return $this->belongsTo(Cabang::class, 'penempatan_cabang');
+    }
+
+    public function penjualans()
+    {
+        return $this->hasMany(RiwayatPenjualan::class, 'id_user');
+    }
+
+    public function keranjangs()
+    {
+        return $this->hasMany(Keranjang::class, 'id_user');
     }
 }
